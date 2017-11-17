@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的订单</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" href="css/reset.css">
+	<style>
+
+	#app{
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		font-size: 16px;
+	}
+	nav{
+		height: 44px;
+		display: flex;
+
+	}
+	nav p{
+		flex: 1;
+		text-align: center;
+		line-height: 44px;
+	}
+	.list div{
+		display: none;
+	}
+
+        nav.home .home,
+        nav.projects .projects,
+        nav.services .services,
+        nav.contact .contact{
+            border-bottom: 2px solid red;
+        }
+
+	   aside.home .home,
+       aside.projects .projects,
+       aside.services .services,
+       aside.contact .contact{
+            display: block;
+        }
+       aside b{
+       	display: none;
+       	font-weight: normal;
+       	font-size: 14px;
+       }
+       .top{
+       	display: flex;
+       	justify-content: space-between;
+       	margin-top: 10px;
+       	height: 40px;
+       	border-bottom: 1px dashed #000;
+       	padding-bottom: 4px;
+       }
+       .bottom{
+       	display: flex;
+       	justify-content: space-between;
+       }
+       ul li{
+       	height: 100px;
+       	border-top: 6px solid #ccc;
+       	width: 100%;
+       	margin-top: 4px;
+       }
+       .rightlist{
+       	margin-right: 10px;
+       }
+       .leftlist{
+       	margin-left: 10px;
+       }
+       .btn{
+       	display: flex;
+       	margin-top: 4px;
+       }
+       .btn span{
+       	height: 30px;
+       	line-height: 30px;
+       	text-align: center;
+		display: block;
+		width: 100px;
+		border:1px solid #000;
+		margin-right: 6px;
+		border-radius: 8px;
+       }
+
+
+	</style>
+</head>
+<body>
+	<div id="app">
+			<nav v-bind:class="active">
+        <p class="home" v-on:click="makeActive('home')">全部订单</p>
+        <p class="projects" v-on:click="makeActive('projects')">待付款</p>
+        <p class="services" v-on:click="makeActive('services')">已完成</p>
+        <p class="contact" v-on:click="makeActive('contact')">已取消</p>
+			</nav>
+			<aside v-bind:class="active">
+        <b class="home">
+				<ul>
+						<li>
+						<div class="top">
+								<div class="leftlist">
+								<div>农夫山泉东方树叶茉莉花查500ml</div>
+								<div style="margin-top: 4px;">500ml</div>
+								</div>
+								<div class="rightlist">
+									<div style="color: red">￥8.51</div>
+									<div style="margin-left: 14px;margin-top: 4px;">x1</div>
+								</div>
+
+						</div>
+						<div class="bottom">
+								<div style="margin-top: 10px;margin-left: 10px;">代收款</div>
+								<div class="btn">
+										<span>付款</span>
+										<span>取消订单</span>
+								</div>
+						</div>
+
+
+						</li>
+
+
+
+
+						<li>
+						<div class="top">
+								<div class="leftlist">
+								<div>农夫山泉东方树叶茉莉花查500ml</div>
+								<div style="margin-top: 4px;">500ml</div>
+								</div>
+								<div class="rightlist">
+									<div style="color: red">￥8.51</div>
+									<div style="margin-left: 14px;margin-top: 4px;">x1</div>
+								</div>
+
+						</div>
+						<div class="bottom">
+								<div style="margin-top: 10px;margin-left: 10px;">代收款</div>
+								<div class="btn">
+										<span>付款</span>
+										<span>取消订单</span>
+								</div>
+						</div>
+
+
+						</li>				
+				</ul>				
+		
+
+        </b>
+        <b class="projects" >待付款</b>
+        <b class="services" >已完成</b>
+        <b class="contact" >已取消</b>
+			</aside>
+
+	</div>
+	<script src="http://cdn.bootcss.com/js-cookie/2.1.2/js.cookie.min.js"></script>
+	<script src='js/vue.min.js'></script>
+	<script src='js/axios.min.js'></script>
+	<script>
+  var vm = new Vue({
+        el:'#app',
+        data:{
+			active:'home',
+			actives:'all'
+        },
+         mounted(){},
+         methods:{
+			makeActive:function(val){
+				vm.active=val
+			}	
+
+         }
+    })
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" href="css/reset.css">
+	<title>支付成功</title>
+	<style>
+/* 	[v-cloak]{
+	display: none;
+} */
+#app{
+	width: 100%;
+	font-size: 16px;
+}
+.banner{
+	width: 100%;
+	text-align: center;
+	margin-top: 50px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+	.banner img {
+		width: 150px;
+		height: 150px;
+	}
+	.content p{
+		margin-top: 20px;
+		margin-left: 20px;
+	}
+	.btn{
+		width: 100%;
+		height: 150px;
+		background: #f1f1f1;
+		position: absolute;
+		bottom: 0px;
+	}
+	.btn1{
+		width: 80%;
+		height:50px;
+		background: #38aaf3;
+		text-align: center;
+		line-height: 50px;
+		margin: auto;
+		color: #fff;
+		border-radius: 10px;
+		margin-top: 20px;
+	}
+	.btn2{
+		width: 80%;
+		height:50px;
+		background: #09bb07;
+		text-align: center;
+		line-height: 50px;
+		margin: auto;
+		color: #fff;
+		border-radius: 10px;
+		margin-top: 20px
+	}
+	</style>
+</head>
+<body>
+<div id="app" v-cloak>
+		<div class="banner">
+			<img src="img/succeed.png" alt="">
+			<p>您的订单已支付成功</p>
+		</div>
+		<div class="content"> 
+		<p>支付时间：2017-10-17 14：11</p>
+		<p>商品件数：1</p>
+		<p>订单渠道：驼铃便利08-11工厂店</p>
+		</div>
+		<div class="btn">
+			<div class="btn1" @click='again'>再次购物</div>
+			<div class="btn2" @click='opinion'>查看订单</div>
+		</div>
+</div>	
+<script src='js/vue.min.js'></script>
+<script src='js/axios.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/arg.js'></script>
+<script src="http://cdn.bootcss.com/js-cookie/2.1.2/js.cookie.min.js"></script>
+<script>
+	var openid = Cookies.get('openid')
+    if (Arg('code')) {
+        Cookies.set('wxtoken',Arg('code'),{
+            expires:999999
+        });
+    }
+    if (!Cookies.get('wxtoken')) {
+        getToken();
+    }
+  	function getToken() {
+       document.location.href = "http://w.luotuobianli.cn/tuolingbianli-web/html/getCode/get-weixin-code.html?redirect_url=" + (document.location.href.split('?')[0]);
+    }
+    var vm = new Vue({
+        el:'#app',
+        data:{
+          },
+    mounted(){
+
+   	 	start()
+    function start () {
+      if(Cookies.get('openid')){
+        checkToken();
+        }
+      else{ 
+        getUserInfo();
+        }
+        }
+    //获取信息
+    function getUserInfo(){
+      axios.get("http://w.luotuobianli.cn/tuolingbianli-web/weixin/getOpenid?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d&code="+ Cookies.get('wxtoken'),{},{
+        headers:{
+            'Authorization':"Bearer " + Cookies.get('wxtoken')
+                }
+                })
+        .then(
+            function (response) {
+            	console.log(response)
+              if(response.data=="token_expired"){
+                getToken();
+                }
+              else{
+                var openid = response.data;
+                    Cookies.set('openid',openid,{
+                    expires:999999
+                    });
+                    start();
+                    }})}
+   	 function checkToken(){
+        var shlf=this;
+      axios.get("http://w.luotuobianli.cn/tuolingbianli-web/apiauthuser/getHeader?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d")
+        .then(
+          	function (response) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data;
+            getDeviceType();});}
+        function  getDeviceType(){
+        
+        	}
+   		 	},
+   		 	methods:{
+   		 		again:function(){
+   		 			localStorage.setItem("item",'')
+   		 			window.location.href='index.html'
+   		 		},
+   		 		opinion:function(){
+   		 			window.location.href='details.html'
+   		 		}
+   		 	}
+			})
+
+</script>
+</body>
+</html>

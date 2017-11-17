@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订单确认</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" href="css/reset.css">
+	<style>
+		.productlist li{
+			height:60px;
+			border-bottom: 1px solid #ccc;
+			width: 100%;
+			display: flex;
+			position: relative;
+		}
+		.price{
+			position: absolute;
+			right: 10px;
+		}
+		.quantity{
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 14px;
+		}
+		.bg{
+			width: 100%;
+			height: 30px;
+			background: #f1f1f1;
+		}
+		.sum{
+			display: flex;
+			font-size: 16px;
+			line-height: 30px;
+			height: 30px;
+			width: 100%;
+			position: absolute;
+			bottom: 100px;
+		}
+		.sum p:nth-child(1){
+			position: absolute;
+			left: 10px;
+		}
+		.sum p:nth-child(2){
+			position: absolute;
+			right: 20px;
+			color: red;
+		}
+		.hint img{
+			width: 20px;
+			height: 20px;
+		}
+		.hint{
+			line-height: 50px;
+			font-size: 16px;
+			text-align: center;
+			width: 100%;
+			height: 50px;
+			background: #f1f1f1;
+			position: absolute;
+			bottom: 50px;
+		}
+		.footer{
+			height: 50px;
+			background: #fff;
+			position: absolute;
+			bottom: 0px;
+			display: flex;
+			width: 100%;
+			font-size: 18px;
+		}
+		.footer div:nth-child(1){
+			width: 60%;
+			line-height: 50px;
+			text-align: center;
+		}
+		.footer div:nth-child(2){
+			width: 40%;
+			background: #ffb901;
+			text-align: center;
+			line-height: 50px;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<ul class="productlist">
+	<li v-for='it in item'>
+	<div class="particulars">
+		<p style="padding-top: 10px;padding-left: 10px;font-size: 16px;">{{it.goodsName}}</p>
+	</div>
+	<div class="price">
+	<p style="color: red;padding-top: 10px;padding-right: 10px;font-size: 16px;" >￥{{it.price}}</p>
+	<p>预购<span style="color: red">{{it.goodsCount}}</span>件</p>
+	</div>
+	</li>
+	</ul>
+	<div class="quantity">
+				共<span style="color: red">{{item.length}}</span>件商品待确认支付
+	</div>
+	<div class="bg">
+	</div>
+	<div class="sum">
+	<p>商品金额</p>
+	<p>￥{{sum}}</p>
+	</div>
+	<div class="hint">
+	支付完成后请支付商品
+	</div>
+	<div class="footer">
+		<div>实际支付金额: <span style="color: red">￥{{sum}}</span></div>
+		<div @click='go'>确认支付</div>
+	</div>
+</div>
+<script src='js/vue.min.js'></script>
+<script src='js/axios.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src="http://cdn.bootcss.com/js-cookie/2.1.2/js.cookie.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+        	item:[],
+        	sum:''
+        },
+        mounted(){
+        		this.item=JSON.parse(localStorage.getItem("item"));
+        		console.log(this.item)
+        		this.sum=localStorage.getItem('sum')
+        },
+           methods:{
+           	go:function(){
+           		  window.location.href='succeed.html'
+           	}
+           }
+    })
+</script>
+</body>
+</html>

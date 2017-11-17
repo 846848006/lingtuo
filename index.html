@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>驼领便利</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <link rel="stylesheet" href="css/iconfont.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+  <style>
+  body{
+    font-size: 14px;
+  }
+  #app{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #f1f1f1;
+  }
+  .footer{
+    width: 100%;
+    height: 58px;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    background: #fff;
+  }
+  .footer dl{
+    flex: 1;
+    text-align: center;
+  }
+  .footer dl dt{
+    width: 30px;
+    height: 35px;
+    margin: auto;
+    font-size: 28px;
+  }
+  .footer dl dt img{
+    width: 100%;
+    height: 100%;
+  }
+  .footer dl dd{
+    font-size: 14px;
+  }
+  [v-cloak]{
+    display: none;
+  }
+  .footer dl:nth-child(1){
+    color:#ffb901
+  }
+  .btn1{
+    width: 100%;
+    height: 50px;
+    background: #ffb901;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 50px;
+    position: absolute;
+    bottom: 59px;
+    border-radius: 8px;
+  }
+  .vacancy{
+    width: 80%;
+    height: 400px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin:auto;
+    text-align: center;
+  }
+  .vacancy p{
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  .banner{
+    width: 100%;
+    height: 150px;
+    background: #ffb901;
+  }
+  .banner dl{
+    display: flex;
+    padding-left: 30px;
+    padding-top: 30px;
+  }
+  .banner dl dt{
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+  }
+  .banner dl dt img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+  }
+  .banner dl dd{
+    font-size: 20px;
+    padding-top: 20px;
+    padding-left: 15px
+  }
+  .personal{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 58px;
+    background: #f1f1f1
+  }
+  .list{
+    width: 100%;
+    height: 150px;
+    background: #fff;
+    margin-top: 10px;
+  }
+  .list ul li{
+    width: 90%;
+    margin-left: 5%;
+    height: 50px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+  }
+  .list ul li:last-child{
+    border-bottom: none;
+  }
+  .list ul li span{
+    font-size: 16px;
+    line-height: 50px;
+    padding-left: 4px;
+  }
+  .list ul li i img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+    top: 16px;
+  }
+  .list ul li p img{
+    width: 30px;
+    height: 30px;
+    padding-top: 10px;
+  }
+  .tu img{
+    width: 100%;
+    height: 200px;
+  }
+  .place{
+    width: 90%;
+    height: 50px;
+    border: 2px solid #ffb901;
+    border-radius: 25px;
+    margin: auto;
+    position: relative;
+  }
+  .place img{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 10px;
+    top: 10px
+  }
+  .place span{
+    line-height: 50px;
+    font-size: 14px;
+    padding-left: 40px;
+  }
+  .place p{
+    width: 100px;
+    height: 53px;
+    position: absolute;
+    right: -1px;
+    background: #ffb901;
+    top: -1px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 50px;
+    border-top-right-radius:25px; 
+    border-bottom-right-radius:25px;
+  }
+  .home{
+  background: #fff;
+    position: absolute;
+    bottom: 58px;
+    top: 0px;
+    left: 0;
+    right: 0;
+  }
+  .RichScan{
+    width: 80%;
+    height: 50px;
+    background: #ffb901;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 16px;
+    position: absolute;
+    bottom: 108px;
+    margin-left: 10%;
+    }
+  .commoditylist ul li{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    background: #fff;
+  }
+  .anjian{
+    position: absolute;
+    right: 10px;
+    top: 55px;
+  }
+  .anjian .tn-primary1{
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      border:1px solid #ffb901;
+      background: none;
+      color: #ffb901;
+      font-size: 20px;
+  }
+  .tn-primary2{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background: #ffb901;
+    color: #fff;
+    border:none;
+    font-size: 20px;
+  }
+  .anjian input{
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    border:1px solid #ccc;
+    margin-left: 10px;
+    margin-right: 10px;
+
+  }
+  .remo{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+  }
+  .remo img{
+    width: 30px;
+    height: 30px;
+  }
+  .fun{
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    bottom: 58px;
+  }
+  .sum{
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    line-height: 50px;
+    font-size: 16px;
+  }
+  .funlist{
+    display: flex;
+    font-size: 16px;
+  }
+  .funlist div:nth-child(1){
+    width: 60%;
+    background: #ffb901;
+    text-align: center;
+    line-height: 50px;
+  }
+  .funlist div:nth-child(2){
+    width: 40%;
+    background: red;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+  }
+
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+
+  <!-- 购物车 -->
+  <div class="cart" v-show='iscare'>
+      <div class="btn1" v-show='isempty' @click='cqcode'>扫一扫条形码</div>
+      <div class="vacancy" v-show='isempty'>
+        <img src="img/1.png" alt="">
+        <p>购物车空空如也</p>
+      </div>
+      <div class="commoditylist" v-show=!isempty>
+        <ul>
+          <li v-for="(item , index) in message" >
+            <div>
+            <p style="font-size: 16px;padding-top: 10px;padding-left: 10px;">{{item.goodsName}}</p>
+            <p style="font-size: 14px;padding-left: 10px;padding-top: 5px;">规格:{{item.id}}</p>
+            <p style="color: red;padding-top: 15px;padding-left: 10px;font-size: 16px">￥{{item.price}}</p>
+            </div>
+          <div class="anjian">
+        <button type="button" class="btn tn-primary1" @click="subtract(index)">-</button>
+              <input type="text" v-model="item.goodsCount" >
+              <button type="button" class="btn tn-primary2" @click="add(index)">+</button>
+          </div>
+        <div class="remo" @click="remove(index)">
+        <img src="img/shanchu.png" alt="">
+        </div>
+          </li>
+        </ul>
+        <div class="fun"> 
+        <div class="sum">
+          <span style="padding-left: 10px;">合计：</span><span style="color:red">￥{{animatenum }}</span>
+        </div>
+        <div class="funlist">
+      <div @click='cqcode1'>继续添加</div>
+      <div @click='go(message,animatenum)'>去结算({{message.length}})</div>
+        </div>
+        </div>
+      </div>
+  </div>
+  <!-- 个人中心 -->
+  <div class="personal" v-show='ispersonal'>
+    <div class="banner">
+    <dl>
+    <dt><img :src="imgurl" alt=""></dt>
+    <dd>{{name}}</dd>
+    </dl>
+    </div>
+    <div class="list">
+    <ul>
+      <li @click='detail'> <p><img src="img/list.png" alt=""></p>  <span>全部订单</span>  <i><img src="img/right.png" alt=""></i></li>
+      <li @click='feedback'> <p><img src="img/fankui.png" alt=""></p> <span>意见反馈</span>  <i><img src="img/right.png" alt=""></i></li>
+      <li>  <p><img src="img/kefu.png" alt=""></p> <span>客服</span>      <i><img src="img/right.png" alt=""></i></li>
+    </ul>
+    </div>
+  </div>
+<!--  首页 -->
+  <div class="home" v-if='ishome'>
+  <div class="tu">
+  <img src="img/banner.png" alt="">
+  </div>
+  <div class="place">
+        <img src="img/weizhi.png" alt="">
+        <span>位置: 驼领农业大学店</span>
+        <p>更改地址</p>
+  </div>
+  <div class="RichScan" @click='cqcode'>
+      扫一扫
+  </div>
+  </div>
+<!--  底部 -->
+  <div class="footer">
+  <dl class="homes" @click='homes(event.currentTarget)'>
+  <dt  class="iconfont icon-shouye" > </dt>
+  <dd>首页</dd>
+  </dl>
+  <dl class="cares" @click='cares(event.currentTarget)' >
+  <dt class="iconfont icon-gouwuche"></dt>
+  <dd>购物车</dd>
+  </dl>
+  <dl class="personals" @click='personals(event.currentTarget)'>
+  <dt class="iconfont icon-Icon"></dt>
+  <dd>个人中心</dd>
+  </dl>
+  </div>
+  </div>
+</body>
+<script src='js/vue.min.js'></script>
+<script src='js/axios.min.js'></script>
+<script src='js/arg.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='http://cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js'></script>
+<script src="http://cdn.bootcss.com/js-cookie/2.1.2/js.cookie.min.js"></script>
+<script src="https://cdn.bootcss.com/tween.js/r14/Tween.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+var openid = Cookies.get('openid')
+    if (Arg('code')) {
+        Cookies.set('wxtoken',Arg('code'),{
+            expires:999999
+        });
+    }
+    if (!Cookies.get('wxtoken')) {
+        getToken();
+    }
+    function getToken() {
+       document.location.href = "http://w.luotuobianli.cn/tuolingbianli-web/html/getCode/get-weixin-code.html?redirect_url=" + (document.location.href.split('?')[0]);
+    }
+    var vm = new Vue({
+        el:'#app',
+        data:{
+          ishome:true,
+          iscare:false,
+          ispersonal:false,
+          isempty:false,
+          totalPrice:0,
+        animatenum:0,
+        name:"",
+        imgurl:'',
+        message:[]
+          },
+ 
+    watch:{
+      toComput2:function(newValue,oldValue){
+      this.tween(newValue,oldValue);
+       }
+        },
+   computed:{
+    //计算总金额
+    toComput2:function(){
+    var vm=this;
+    //每次进来要重置总金额
+    vm.totalPrice=0;
+    this.message.forEach(function(mess){
+     vm.totalPrice+=parseInt(mess.price*mess.goodsCount);
+    })
+    return this.totalPrice;
+    }
+   },
+    mounted(){
+   this.tween(this.totalPrice);
+      start()
+    function start () {
+      if(Cookies.get('openid')){
+        checkToken();
+        }
+      else{ 
+        getUserInfo();
+        }
+        }
+    //获取信息
+    function getUserInfo(){
+      axios.get("http://w.luotuobianli.cn/tuolingbianli-web/weixin/getOpenid?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d&code="+ Cookies.get('wxtoken'),{},{
+        headers:{
+            'Authorization':"Bearer " + Cookies.get('wxtoken')
+                }
+                })
+        .then(
+            function (response) {
+              console.log(response)
+              if(response.data=="token_expired"){
+                getToken();
+                }
+              else{
+                var openid = response.data;
+                    Cookies.set('openid',openid,{
+                    expires:999999
+                    });
+                    start();
+                    }})}
+     function checkToken(){
+        var shlf=this;
+      axios.get("http://w.luotuobianli.cn/tuolingbianli-web/apiauthuser/getHeader?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d")
+        .then(
+            function (response) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data;
+            getDeviceType();});}
+        function  getDeviceType(){
+          axios.get('http://w.luotuobianli.cn/tuolingbianli-web/member/detailMember?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d&memberWeixinOpenId='+Cookies.get('openid'))
+            .then(function(data){
+            	localStorage.setItem("id",data.data.data.id)
+            console.log(data.data.data.id)
+              vm.name=data.data.data.name
+              vm.imgurl=data.data.data.headportrait
+            })
+          if(localStorage.getItem("item")){
+             vm.message=JSON.parse(localStorage.getItem("item"));
+          }
+          if(vm.message.length==0){
+            vm.isempty=true
+          }else{
+        vm.isempty=false
+          }
+          }
+        },
+   methods:{
+        toComput:function(){
+      var vm=this;
+      vm.message.forEach(function(mess){
+      vm.totalPrice+=parseInt(mess.price*mess.goodsCount);
+      })
+      return vm.totalPrice;
+      },
+      add:function(index){
+      var vm=this;
+      vm.message[index].goodsCount++;
+      var obj = JSON.stringify(vm.message)
+      localStorage.setItem("item",obj)
+      },
+      subtract:function(index){
+         var vm=this;
+         vm.message[index].goodsCount--;
+        var obj = JSON.stringify(vm.message)
+      localStorage.setItem("item",obj)
+         if(vm.message[index].goodsCount<=0){
+          $.confirm("您确定删除这件商品嘛？", function() {
+           vm.message.splice(index,1)
+          if(vm.message.length==0){
+              vm.isempty=true
+              var obj = JSON.stringify(vm.message)
+            localStorage.setItem("item",obj)
+            }else{
+            vm.isempty=false
+              }
+       }, function() {
+            vm.message[index].goodsCount++
+        });
+         }                              
+    },
+    remove:function(index){
+    var vm=this;
+   var obj = JSON.stringify(vm.message)
+  localStorage.setItem("item",obj)
+      $.confirm("您确定删除这件商品嘛？", function() {
+           vm.message.splice(index,1)
+          if(vm.message.length==0){
+              vm.isempty=true
+              var obj = JSON.stringify(vm.message)
+            localStorage.setItem("item",obj)
+            }else{
+            vm.isempty=false
+             }
+       		})
+    },
+    empty:function(){
+    var vm=this;
+    vm.message.splice(0,vm.message.length);
+    },
+    jia:function(index){
+    var vm=this;
+    vm.arr[index].one++;
+        var obj = JSON.stringify(vm.message)
+      localStorage.setItem("item",obj)
+    },
+    tween:function(newValue,oldValue){
+   var vm=this;
+   var twen=new TWEEN.Tween({animatenum:oldValue});
+   function animate() {
+     requestAnimationFrame(animate);  
+     TWEEN.update(); 
+   };
+   twen.to({animatenum:newValue},750);
+   twen.onUpdate(function(){
+   //toFixed();保留几位小数
+   vm.animatenum = this.animatenum.toFixed();
+   })
+   twen.start();
+   animate();
+  },
+  go:function(item,sum){
+  var obj = JSON.stringify(item)
+  localStorage.setItem("item",obj)
+  localStorage.setItem("sum",sum)
+  window.location.href='account.html'
+  },
+  detail:function(){
+      window.location.href='details.html'
+  },
+    homes:function(e){
+          $(e).css({color:'#ffb901'}),
+          $(e).siblings().css({color:"#000"}),
+          vm.ishome=true,
+          vm.iscare=false,
+          vm.ispersonal=false
+          },
+          cares:function(e){
+          $(e).css({color:'#ffb901'}),
+          $(e).siblings().css({color:"#000"}),
+          vm.ishome=false,
+          vm.iscare=true,
+          vm.ispersonal=false
+          },
+          personals:function(e){
+          $(e).css({color:'#ffb901'}),
+          $(e).siblings().css({color:"#000"}),
+          vm.ishome=false,
+          vm.iscare=false,
+          vm.ispersonal=true
+          },
+          cqcode:function(){
+              vm.eq()
+                },
+          cqcode1:function(){
+      var newstr='&shopid=1&goodsBarcode=921593890127'/*+str*/
+                    axios.post('http://w.luotuobianli.cn/tuolingbianli-web/shopgoods/scanCodeShopGoods?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d',newstr)
+                      .then(function(data){
+                        console.log(data)
+                          if(data.data.code==000002){
+                              alert('没有找到该商品')
+                          }else{
+                             
+                              if(vm.message.length==0){
+                                vm.message.push(data.data.data)
+                                vm.ishome=false,
+                                  vm.iscare=true,
+                                  vm.ispersonal=false
+                                  $('.cares').css({color:'#ffb901'}),
+                                  $('.cares').siblings().css({color:"#000"});
+                              }else{
+                                vm.ishome=false,
+                                  vm.iscare=true,
+                                  vm.ispersonal=false
+                                  $('.cares').css({color:'#ffb901'}),
+                                  $('.cares').siblings().css({color:"#000"});
+                                  
+                                  for(var i=0; i<=vm.message.length;i++){
+                                   console.log(i)
+                                      if(vm.message[i].goodsid==data.data.data.goodsid){
+                                            vm.message[i].goodsCount++
+                                            console.log("重复")
+
+                                       }else{
+                                          console.log('添加')
+                                           vm.message.push(data.data.data)
+                                           break;
+                                          }
+                                        }
+                                }
+                                
+                              if(vm.message.length==0){
+                                  vm.isempty=true
+                                }else{
+                            vm.isempty=false
+                                }
+                            }
+                          })//接口结束
+          },
+            eq:function(){
+/*            var str=window.location.href;
+            var newstr=''
+            if(str.indexOf("?")==-1){
+            var reg = new RegExp("(^|&)" +"http://w.luotuobianli.cn/tuolingbianli-web"+ "/([^&]*)(&|$)","i");
+            var r =str.match(reg);
+            newstr=r[2]
+            }else{
+              var reg = new RegExp("(^|&)" +"http://w.luotuobianli.cn/tuolingbianli-web"+ "/([^&]*)(&|$)","i");
+              var r =str.match(reg);
+                newstr=r[2].slice(0,r[2].indexOf("?"))
+              }
+                  axios.get("http://w.luotuobianli.cn/tuolingbianli-web/weixin/getScanQRCode?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d&jsUrl="+newstr)
+                    .then(function(res){
+                        var data=res.data.data
+                      wx.config({
+                          debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            //        debug : true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                          appId : data.appId, // 必填，公众号的唯一标识
+                          timestamp : data.timestamp, // 必填，生成签名的时间戳
+                          nonceStr : data.nonceStr, // 必填，生成签名的随机串
+                          signature : data.signature,// 必填，签名，见附录1
+                          jsApiList : ["scanQRCode"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        });
+                        wx.ready(function() {
+                    wx.scanQRCode({
+                        needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                        scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                        success: function (res) {
+                    var str=res.resultStr.slice(res.resultStr.indexOf(",")+2,res.resultStr.length)*/
+                                var newstr='&shopid=1&goodsBarcode=921593890097'/*+str*/
+                    axios.post('http://w.luotuobianli.cn/tuolingbianli-web/shopgoods/scanCodeShopGoods?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d',newstr)
+                      .then(function(data){
+                          if(data.data.code==000002){
+                              alert('没有找到该商品')
+                          }else{
+                              if(vm.message.length==0){
+                                vm.message.push(data.data.data)
+                                vm.ishome=false,
+                                  vm.iscare=true,
+                                  vm.ispersonal=false
+                                  $('.cares').css({color:'#ffb901'}),
+                                  $('.cares').siblings().css({color:"#000"});
+                              }else{
+                                vm.ishome=false,
+                                  vm.iscare=true,
+                                  vm.ispersonal=false
+                                  $('.cares').css({color:'#ffb901'}),
+                                  $('.cares').siblings().css({color:"#000"});
+                                  for(var i=0;i<vm.message.length;i++){
+                                      if(vm.message[i].goodsid==data.data.data.goodsid){
+                                            vm.message[i].goodsCount++
+                                            console.log("重复")
+                                         
+                                       }else{
+                                          console.log("添加")
+                                           vm.message.push(data.data.data)
+                                            break;
+                                          }
+                                        }
+                                }
+                              if(vm.message.length==0){
+                                  vm.isempty=true
+                                }else{
+                            vm.isempty=false
+                                }
+                            }
+                          })//接口结束
+
+ /*                       }
+                      
+                      }); 
+                      })
+                      })*/
+                  },
+                  feedback:function(){
+                    window.location.href='opinion.html'
+                  }
+                  }
+                        })
+</script>
+</html>

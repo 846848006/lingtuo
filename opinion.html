@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>意见反馈</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="css/reset.css">
+<style>
+#app{
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+background: #f1f1f1
+}
+.btn{
+	width: 90%;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	color: #fff;
+	background: red;
+	font-size: 16px;
+	border-radius: 10px;
+	margin-left: 5%;
+	margin-top: 50px;
+}
+span{
+	position: absolute;
+	right: 10px;
+	top: 130px;
+	font-size: 14px;
+}
+ ::-webkit-input-placeholder{   
+    font-size: 16px;
+    padding-left: 10px;
+     line-height: 20px;
+ }
+</style>
+</head>
+<body>
+	<div id="app">
+			<textarea name="a" style="width:100%;height:150px;margin-top: 10px;border:none;background: #fff" placeholder="请写下您的宝贵意见，欢迎吐槽，必将带给您一个完美的呈现" v-model='content'></textarea>
+			<span>300字以内</span>
+			<div class="btn" @click='btn'>
+					提交
+			</div>
+	</div>
+	<script src="http://cdn.bootcss.com/js-cookie/2.1.2/js.cookie.min.js"></script>
+	<script src='js/vue.min.js'></script>
+	<script src='js/axios.min.js'></script>
+	<script src='js/arg.js'>
+	</script>	
+</body>
+<script>
+	var openid = Cookies.get('openid')
+    if (Arg('code')) {
+        Cookies.set('wxtoken',Arg('code'),{
+            expires:999999
+        });
+    }
+    if (!Cookies.get('wxtoken')) {
+        getToken();
+    }
+  	function getToken() {
+       document.location.href = "http://w.luotuobianli.cn/tuolingbianli-web/html/getCode/get-weixin-code.html?redirect_url=" + (document.location.href.split('?')[0]);
+    }
+    var vm = new Vue({
+        el:'#app',
+        data:{
+        	content:""
+
+          },
+    mounted(){
+
+   	 	start()
+    function start () {
+      if(Cookies.get('openid')){
+        checkToken();
+        }
+      else{ 
+        getUserInfo();
+        }
+        }
+    //获取信息
+    function getUserInfo(){
+      axios.get("http://w.luotuobianli.cn/tuolingbianli-web/weixin/getOpenid?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d&code="+ Cookies.get('wxtoken'),{},{
+        headers:{
+            'Authorization':"Bearer " + Cookies.get('wxtoken')
+                }
+                })
+        .then(
+            function (response) {
+            	console.log(response)
+              if(response.data=="token_expired"){
+                getToken();
+                }
+              else{
+                var openid = response.data;
+                    Cookies.set('openid',openid,{
+                    expires:999999
+                    });
+                    start();
+                    }})}
+   	 function checkToken(){
+        var shlf=this;
+      axios.get("http://w.luotuobianli.cn/tuolingbianli-web/apiauthuser/getHeader?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d")
+        .then(
+          	function (response) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data;
+            getDeviceType();});}
+        function  getDeviceType(){
+        	}
+   		 	},
+   		 	methods:{	
+   		 		btn:function(){
+   		 var str="&createuser="+localStorage.getItem("id")+"&content="+vm.content
+        	axios.post("http://w.luotuobianli.cn/tuolingbianli-web/feedback/saveFeedBack?appid=tlbianli&secret=06fb680f639a3f180f08cdce28b7161d",str)
+        	.then(function(data){
+        		console.log(data)
+        	})
+   		 		}
+
+
+
+   		 	}
+			})
+
+</script>
+</html>

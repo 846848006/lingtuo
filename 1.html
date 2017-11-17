@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var nArr=[
+  {
+    id:10001,
+    name:'张三'
+  },{
+    id:10002,
+    name:'李四'
+  },{
+    id:10001,
+    name:'张三'
+  },{
+    id:10003,
+    name:'王五'
+  },{
+    id:10004,
+    name:'赵六'
+  },{
+    id:10003,
+    name:'王五'
+  },{
+    id:10006,
+    name:'zuoqi'
+  }
+];
+
+var newArr=[];
+function _objIsInArray(obj,arr){
+  let tmpStatus=false;
+  for(let j=0;j<arr.length;j++){
+    if(obj.id==arr[j].id){
+      return j;
+      break;
+    }else{
+      tmpStatus=false;
+    }
+  }
+  if(!tmpStatus){
+    return -1;
+  }
+}
+for(let i=0;i<nArr.length;i++){
+  if(_objIsInArray(nArr[i],newArr) ==-1){
+     newArr.push(nArr[i]);
+  }else{
+      
+  }
+}
+console.log(newArr);
+
+  </script>
+</body>
+</html>
